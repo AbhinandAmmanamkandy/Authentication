@@ -24,6 +24,11 @@ public class AppConfig {
                 .formLogin(form -> form
                         .loginPage("/auth/login")
                         .defaultSuccessUrl("/dashboard", true)
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutUrl("/auth/logout")
+                        .logoutSuccessUrl("/auth/login")
+                        .invalidateHttpSession(true)
                         .permitAll());
         return http.build();
     }
