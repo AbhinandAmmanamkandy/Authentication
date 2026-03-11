@@ -23,6 +23,13 @@
                     const li = document.createElement("li");
                     li.textContent = asset.name + " ";
 
+                    const viewButton = document.createElement("button");
+                    viewButton.textContent = "View";
+
+                    viewButton.onclick = function () {
+                        window.location.href = "/assets/" + asset.id;
+                    }
+
                     const deleteButton = document.createElement("button");
                     deleteButton.textContent = "Delete";
 
@@ -39,6 +46,7 @@
                         }).then(() => loadAssets());
                     };
 
+                    li.appendChild(viewButton);
                     li.appendChild(deleteButton);
                     ul.appendChild(li);
                 });
