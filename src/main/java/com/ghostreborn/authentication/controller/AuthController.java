@@ -23,6 +23,11 @@ public class AuthController {
         return "login";
     }
 
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
+
     @PostMapping("/register")
     public String registerUser(User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
