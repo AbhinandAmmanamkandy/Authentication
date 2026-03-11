@@ -26,4 +26,9 @@ public class AssetsController {
         assetRepository.save(asset);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteAsset(@PathVariable Long id) {
+        assetRepository.deleteById(id);
+    }
+
 }
