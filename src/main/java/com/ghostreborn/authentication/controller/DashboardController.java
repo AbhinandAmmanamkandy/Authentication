@@ -22,7 +22,7 @@ public class DashboardController {
 
     @GetMapping
     public String dashboard(Model model) {
-        List<Asset> assets = assetRepository.findAll();
+        List<Asset> assets = assetRepository.findByDeletedFalse();
         model.addAttribute("assets", assets);
         return "dashboard";
     }
