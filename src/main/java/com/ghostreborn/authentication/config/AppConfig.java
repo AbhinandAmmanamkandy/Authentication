@@ -23,6 +23,7 @@ public class AppConfig {
                         .authenticated())
                 .formLogin(form -> form
                         .loginPage("/auth/login")
+                        .defaultSuccessUrl("/auth/dashboard", true)
                         .permitAll());
         return http.build();
     }
