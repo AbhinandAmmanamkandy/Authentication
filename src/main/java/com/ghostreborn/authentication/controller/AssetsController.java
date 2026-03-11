@@ -3,7 +3,6 @@ package com.ghostreborn.authentication.controller;
 import com.ghostreborn.authentication.model.Asset;
 import com.ghostreborn.authentication.repository.AssetRepository;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,10 +18,9 @@ public class AssetsController {
     }
 
     @GetMapping
-    public String assetsPage(Model model) {
-        List<Asset> assets = assetRepository.findByDeletedFalse();
-        model.addAttribute("assets", assets);
-        return "assets";
+    @ResponseBody
+    public List<Asset> getAll() {
+        return assetRepository.findByDeletedFalse();
     }
 
     @GetMapping("/{id}")
