@@ -33,10 +33,13 @@ public class DashboardController {
     }
 
     @GetMapping("/view/{id}")
-    public Asset viewAsset(
-            @PathVariable Long id
+    public String viewAsset(
+            @PathVariable Long id,
+            Model model
     ) {
-        return assetRepository.findById(id).orElse(new Asset());
+        Asset asset = assetRepository.findById(id).orElse(new Asset());
+        model.addAttribute("asset", asset);
+        return "view_asset";
     }
 
 }
