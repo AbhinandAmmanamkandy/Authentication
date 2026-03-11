@@ -20,7 +20,7 @@ public class AssetsController {
     @GetMapping
     @ResponseBody
     public List<Asset> getAll() {
-        return assetRepository.findAll();
+        return assetRepository.findByDeletedFalse();
     }
 
     @GetMapping("/{id}")
@@ -51,7 +51,13 @@ public class AssetsController {
     @DeleteMapping("/{id}")
     @ResponseBody
     public String deleteAsset(@PathVariable Long id) {
-        assetRepository.deleteById(id);
+        Asset asset = assetRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Asset not found"));
+
+        asset.setDeleted(true);
+
+        assetRepository.save(asset);
+
         return "deleted";
     }
 
