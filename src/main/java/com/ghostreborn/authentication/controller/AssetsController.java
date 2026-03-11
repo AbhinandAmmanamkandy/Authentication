@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/assets")
@@ -38,12 +39,14 @@ public class AssetsController {
 
     @PatchMapping("/{id}")
     @ResponseBody
-    public Asset updateAsset(@PathVariable Long id, @RequestBody Asset updatedAsset) {
+    public Asset updateAsset(@PathVariable Long id, @RequestBody Map<String, String> body) {
+
         Asset asset = assetRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Asset not found"));
 
-        if (updatedAsset.getName() != null)
-            asset.setName(updatedAsset.getName());
+        if (body.get("name") != null) {
+            asset.setName(body.get("name"));
+        }
 
         return assetRepository.save(asset);
     }
