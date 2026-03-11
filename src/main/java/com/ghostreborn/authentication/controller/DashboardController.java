@@ -13,4 +13,9 @@ public class DashboardController {
         return "dashboard";
     }
 
+    @GetMapping("/create")
+    public String createAsset() {
+        return "create_asset";
+    }
+
 }
