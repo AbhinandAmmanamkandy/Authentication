@@ -13,7 +13,10 @@ public class AppConfig {
         http.authorizeHttpRequests(auth -> auth.
                         requestMatchers("/auth/**").permitAll()
                         .anyRequest()
-                        .authenticated());
+                        .authenticated())
+                .formLogin(form -> form
+                        .loginPage("/auth/login")
+                        .permitAll());
         return http.build();
     }
 
