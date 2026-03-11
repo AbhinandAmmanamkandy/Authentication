@@ -17,4 +17,5 @@ public class Asset {
     @GeneratedValue
     private Long id;
     private String name;
+    private boolean deleted = false;
 }
