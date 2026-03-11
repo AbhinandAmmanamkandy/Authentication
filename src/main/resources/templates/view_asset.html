@@ -14,6 +14,7 @@
 </p>
 
 <button onclick="updateAsset()">Update</button>
+<button onclick="deleteAsset()">Delete</button>
 
 <a href="/dashboard">Back</a>
 
@@ -42,6 +43,21 @@
             .then(data => {
                 console.log(data)
                 alert("Asset updated!");
+                window.location.href = "/dashboard";
+            });
+
+    }
+
+    function deleteAsset() {
+        fetch("/assets/" + assetId, {
+            method: "DELETE",
+            headers: {
+                [csrfHeader]: csrfToken
+            }
+        })
+            .then(res => res.text())
+            .then(data => {
+                alert("Asset deleted!");
                 window.location.href = "/dashboard";
             });
 
