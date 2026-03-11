@@ -13,7 +13,7 @@ public class AssetsController {
 
     ArrayList<Asset> testAssets = new ArrayList<>(
             List.of(
-                    new Asset()
+                    new Asset(1L, "Asset 1")
             )
     );
 
