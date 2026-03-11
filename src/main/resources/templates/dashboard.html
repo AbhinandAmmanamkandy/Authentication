@@ -1,66 +1,19 @@
 <html>
 <head>
     <title>Dashboard</title>
-    <meta name="_csrf" th:content="${_csrf.token}">
-    <meta name="_csrf_header" th:content="${_csrf.headerName}">
 </head>
 <body>
 
 <h2>Assets</h2>
-<ul id="assets"></ul>
 
-<script>
-    function loadAssets() {
-        fetch("/assets")
-            .then(res => res.json())
-            .then(data => {
-
-                const ul = document.getElementById("assets");
-                ul.innerHTML = "";
-
-                data.forEach(asset => {
-
-                    const li = document.createElement("li");
-                    li.textContent = asset.name + " ";
-
-                    const viewButton = document.createElement("button");
-                    viewButton.textContent = "View";
-
-                    viewButton.onclick = function () {
-                        window.location.href = "/assets/" + asset.id;
-                    }
-
-                    const deleteButton = document.createElement("button");
-                    deleteButton.textContent = "Delete";
-
-                    deleteButton.onclick = function () {
-
-                        const token = document.querySelector('meta[name="_csrf"]').content;
-                        const header = document.querySelector('meta[name="_csrf_header"]').content;
-
-                        fetch("/assets/" + asset.id, {
-                            method: "DELETE",
-                            headers: {
-                                [header]: token
-                            }
-                        }).then(() => loadAssets());
-                    };
-
-                    li.appendChild(viewButton);
-                    li.appendChild(deleteButton);
-                    ul.appendChild(li);
-                });
-            });
-    }
-
-    loadAssets();
-</script>
-
-<a href="/dashboard/create">Create Asset</a>
-<form action="/auth/logout" method="post">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-    <button type="submit">Logout</button>
-</form>
-
+<ul>
+    <li th:each="asset : ${assets}">
+        <a th:href="@{/assets/{id}(id=${asset.id})}">
+            <span th:text="${asset.id}"></span>
+            -
+            <span th:text="${asset.name}"></span>
+        </a>
+    </li>
+</ul>
 </body>
 </html>
