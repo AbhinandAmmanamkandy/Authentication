@@ -37,9 +37,4 @@ public class AuthController {
         return "redirect:/auth/login";
     }
 
-    @GetMapping("/dashboard")
-    public String dashboard() {
-        return "dashboard";
-    }
-
 }
