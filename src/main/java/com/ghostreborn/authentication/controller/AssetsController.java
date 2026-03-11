@@ -2,11 +2,12 @@ package com.ghostreborn.authentication.controller;
 
 import com.ghostreborn.authentication.model.Asset;
 import com.ghostreborn.authentication.repository.AssetRepository;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/assets")
 public class AssetsController {
 
@@ -17,13 +18,15 @@ public class AssetsController {
     }
 
     @GetMapping
+    @ResponseBody
     public List<Asset> getAll() {
         return assetRepository.findAll();
     }
 
     @PostMapping
-    public void createAsset(Asset asset) {
+    public String createAsset(Asset asset) {
         assetRepository.save(asset);
+        return "redirect:/dashboard";
     }
 
     @DeleteMapping("/{id}")
