@@ -22,7 +22,7 @@ public class AssetsController {
     }
 
     @PostMapping
-    public void createAsset(@RequestBody Asset asset) {
+    public void createAsset(Asset asset) {
         assetRepository.save(asset);
     }
 
