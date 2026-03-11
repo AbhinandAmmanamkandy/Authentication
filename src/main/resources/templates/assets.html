@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Assets</title>
+</head>
+<body>
+
+<h2>Assets</h2>
+
+<ul>
+    <li th:each="asset : ${assets}">
+        <span th:text="${asset.id}"></span>
+        -
+        <span th:text="${asset.name}"></span>
+    </li>
+</ul>
+
+</body>
+</html>
