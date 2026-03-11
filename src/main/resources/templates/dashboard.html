@@ -1,15 +1,22 @@
 <html>
 <head>
-    <title>
-        Dashboard
-    </title>
-    <script>
-        fetch("/assets")
-            .then(res => res.json())
-            .then(data => console.log(data));
-    </script>
+    <title>Dashboard</title>
 </head>
 <body>
+<h2>Assets</h2>
+<ul id="assets"></ul>
 
+<script>
+    fetch("/assets")
+        .then(res => res.json())
+        .then(data => {
+            const ul = document.getElementById("assets");
+            data.forEach(asset => {
+                const li = document.createElement("li");
+                li.textContent = asset.name;
+                ul.appendChild(li);
+            })
+        });
+</script>
 </body>
 </html>
