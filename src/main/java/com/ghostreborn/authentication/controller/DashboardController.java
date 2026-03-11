@@ -38,6 +38,7 @@ public class DashboardController {
             Model model
     ) {
         Asset asset = assetRepository.findById(id).orElse(new Asset());
+        System.out.println(asset);
         model.addAttribute("asset", asset);
         return "view_asset";
     }

@@ -8,12 +8,15 @@
 
 <ul>
     <li th:each="asset : ${assets}">
-        <a th:href="@{/assets/{id}(id=${asset.id})}">
+        <a th:href="@{/dashboard/view/{id}(id=${asset.id})}">
             <span th:text="${asset.id}"></span>
             -
             <span th:text="${asset.name}"></span>
         </a>
     </li>
 </ul>
+<form th:action="@{/auth/logout}" method="post">
+    <button type="submit">Logout</button>
+</form>
 </body>
 </html>
