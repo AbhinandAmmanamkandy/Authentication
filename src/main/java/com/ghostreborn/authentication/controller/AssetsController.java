@@ -30,8 +30,10 @@ public class AssetsController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteAsset(@PathVariable Long id) {
+    @ResponseBody
+    public String deleteAsset(@PathVariable Long id) {
         assetRepository.deleteById(id);
+        return "deleted";
     }
 
 }
