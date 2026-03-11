@@ -1,19 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Asset View</title>
+    <title>Edit Asset</title>
 </head>
 
 <body>
 
-<h2>Asset Details</h2>
+<h2>Edit Asset</h2>
 
 <p>
     <strong>Name:</strong>
-    <span th:text="${asset.name}"></span>
+    <input type="text" id="name" th:value="${asset.name}">
 </p>
 
+<button onclick="updateAsset()">Update</button>
+
 <a href="/dashboard">Back</a>
+
+<script th:inline="javascript">
+
+    const assetId = [[${asset.id}]];
+
+    const csrfToken = [[${_csrf.token}]];
+    const csrfHeader = [[${_csrf.headerName}]];
+
+    function updateAsset() {
+
+        const name = document.getElementById("name").value;
+
+        fetch("/assets/" + assetId, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                [csrfHeader]: csrfToken
+            },
+            body: JSON.stringify({
+                name: name
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                alert("Asset updated!");
+                window.location.href = "/dashboard";
+            });
+
+    }
+
+</script>
 
 </body>
 </html>
